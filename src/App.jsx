@@ -1,120 +1,92 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [temp,setTemp]=useState("");
+  const [word,setWord]=useState("");
+  const [size,setSize]=useState(250);
+  const [bgColor,setBgColor]=useState("ffffff");
+  const [qrCode,setQrCode]=useState("");
+
+  useEffect(()=>{
+    if(word){
+      console.log(size);
+      setQrCode(
+        `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(word)}&size=${size}x${size}&bgcolor=${bgColor}`
+      );
+    }
+  },[word,size,bgColor]);
+
+  const handleClick=()=>{
+    setWord(temp);
+  }
+
+  const generateQR= async()=>{
+    const response=await fetch(qrCode);
+    const blob=await response.blob()
+    
+    const url=URL.createObjectURL(blob);
+
+    const link=document.createElement("a");
+
+    link.href=url;
+    link.download='qr-code.png';
+
+    link.click();
+
+    URL.revokeObjectURL(url);
+  }
 
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+      <div className='QR'>
+        <h1 className='flex justify-center'>QR Code Generator</h1>
+        <div className='input-box'>
+          <input 
+            type="text" 
+            placeholder='Enter the url'
+            onChange={(e)=> setTemp(e.target.value)}
+            
+          />
+          <button className='border-2 bg-orange-600'
+            onClick={handleClick}
+          >
+            Generate
+          </button>
         </div>
+
+        <div className='size-bgColor'>
+          <h5>Background Color:</h5>
+          <input 
+            type="color" 
+            onChange={(e)=>setBgColor(e.target.value.substring(1))}
+          />
+          <input 
+            type="range" 
+            min={200}
+            max={400}
+            value={size}
+            onChange={(e)=>{setSize(Number(e.target.value))}}
+          />
+          <label>Dimension:{size}</label>
+        </div>
+
+        <div className='output-box'>
+          {
+            qrCode &&
+            <img src={qrCode} alt="Generated QR Code" />
+          }
+        </div>
+
         <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
+          <button 
+            className='border-2 bg-amber-100'
+            onClick={generateQR}
+          >
+            Download QR Code
+          </button>
         </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+      </div>
     </>
   )
 }
