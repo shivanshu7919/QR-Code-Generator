@@ -8,6 +8,8 @@ const QRContextProvider = ({ children }) => {
   const [size, setSize] = useState(250);
   const [bgColor, setBgColor] = useState("ffffff");
   const [qrCode, setQrCode] = useState("");
+  const [logo,setLogo]=useState(null);
+  const [logoPreview,setLogoPreview]=useState("");
 
   const value={
     temp,
@@ -19,7 +21,11 @@ const QRContextProvider = ({ children }) => {
     bgColor,
     setBgColor,
     qrCode,
-    setQrCode
+    setQrCode,
+    logo,
+    setLogo,
+    logoPreview,
+    setLogoPreview
   };
 
   useEffect(()=>{

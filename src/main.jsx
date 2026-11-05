@@ -8,6 +8,8 @@ import QRContextProvider from './context/QRContextProvider.jsx'
 import QRPreview from './Components/QRRreview/QRPreview.jsx'
 import DownloadBtn from './Components/DownloadBtn/DownloadBtn.jsx'
 import QRSettings from './Components/QRSettings/QRSettings.jsx'
+import LogoUpload from './Components/LogoUpload/LogoUpload.jsx'
+import LogoPreview from './Components/LogoPreview/LogoPreview.jsx'
 
 
 
@@ -24,5 +26,8 @@ createRoot(document.getElementById('root')).render(
     <QRSettings/>
     <QRPreview/>
     <DownloadBtn/>
+
+    <LogoUpload/>
+    <LogoPreview/>
   </QRContextProvider>
 )
