@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
-import qrContext from "./qrContext";
+import QRContext from "./QRContext";
 
-const qrContextProvider = ({ children }) => {
+const QRContextProvider = ({ children }) => {
 
   const [temp, setTemp] = useState("");
   const [word, setWord] = useState("");
@@ -22,9 +22,11 @@ const qrContextProvider = ({ children }) => {
     setQrCode
   };
 
-  <qrContext.Provider value={value}>
-    {children}
-  </qrContext.Provider>
+  return(
+    <QRContext.Provider value={value}>
+      {children}
+    </QRContext.Provider>
+  );
 }
 
-export default qrContextProvider;
+export default QRContextProvider;

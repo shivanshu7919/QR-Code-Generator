@@ -1,8 +1,12 @@
 import React,{useContext} from 'react'
-import qrContext from '../../context/qrContext';
+import QRContext from '../../context/QRContext.jsx';
 
 function QRInput() {
-  const {setTemp}=useContext(qrContext);
+  const {temp,setTemp,setWord}=useContext(QRContext);
+
+  const handleClick=()=>{
+    setWord(temp);
+  }
 
   return (
     <div>
@@ -11,6 +15,12 @@ function QRInput() {
         placeholder='Enter the url'
         onChange={(e) => setTemp(e.target.value)}
       />
+
+      <button className='border-2 bg-orange-600'
+        onClick={handleClick}
+      >
+        Generate
+      </button>
     </div>
   )
 }
