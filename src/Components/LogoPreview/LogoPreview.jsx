@@ -9,7 +9,11 @@ function LogoPreview() {
       Logo Preview
       {
         logoPreview && (
-          <img src={logoPreview} alt="Logo Preview" />
+          <img 
+            src={logoPreview} 
+            alt="Logo Preview" 
+            width={300}
+          />
         )
       }
     </div>
