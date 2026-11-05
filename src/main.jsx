@@ -2,8 +2,13 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
+import { useEffect } from 'react'
 import QRInput from './Components/QRInput/QRInput.jsx'
 import QRContextProvider from './context/QRContextProvider.jsx'
+import QRPreview from './Components/QRRreview/QRPreview.jsx'
+import DownloadBtn from './Components/DownloadBtn/DownloadBtn.jsx'
+
+
 
 createRoot(document.getElementById('root')).render(
   // <StrictMode>
@@ -11,7 +16,11 @@ createRoot(document.getElementById('root')).render(
   //   <QRInput/>
   // </StrictMode>,
 
+  
+
   <QRContextProvider>
     <QRInput/>
+    <QRPreview/>
+    <DownloadBtn/>
   </QRContextProvider>
 )

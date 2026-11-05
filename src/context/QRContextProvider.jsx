@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState , useEffect} from "react";
 import QRContext from "./QRContext";
 
 const QRContextProvider = ({ children }) => {
@@ -21,6 +21,16 @@ const QRContextProvider = ({ children }) => {
     qrCode,
     setQrCode
   };
+
+  useEffect(()=>{
+      if(word){
+        console.log(size);
+        setQrCode(
+          `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(word)}&size=${size}x${size}&bgcolor=${bgColor}`
+        );
+      }
+    },[word,size,bgColor]);
+  
 
   return(
     <QRContext.Provider value={value}>
