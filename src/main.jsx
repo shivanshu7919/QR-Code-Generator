@@ -7,6 +7,7 @@ import QRInput from './Components/QRInput/QRInput.jsx'
 import QRContextProvider from './context/QRContextProvider.jsx'
 import QRPreview from './Components/QRRreview/QRPreview.jsx'
 import DownloadBtn from './Components/DownloadBtn/DownloadBtn.jsx'
+import QRSettings from './Components/QRSettings/QRSettings.jsx'
 
 
 
@@ -20,6 +21,7 @@ createRoot(document.getElementById('root')).render(
 
   <QRContextProvider>
     <QRInput/>
+    <QRSettings/>
     <QRPreview/>
     <DownloadBtn/>
   </QRContextProvider>
