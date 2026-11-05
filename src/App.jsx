@@ -8,6 +8,8 @@ function App() {
   const [bgColor,setBgColor]=useState("ffffff");
   const [qrCode,setQrCode]=useState("");
 
+  
+
   useEffect(()=>{
     if(word){
       console.log(size);
