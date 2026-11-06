@@ -5,7 +5,7 @@ const QRContextProvider = ({ children }) => {
 
   const [temp, setTemp] = useState("");
   const [word, setWord] = useState("");
-  const [size, setSize] = useState(250);
+  const [size, setSize] = useState(200);
   const [bgColor, setBgColor] = useState("ffffff");
   const [qrCode, setQrCode] = useState("");
   const [logo,setLogo]=useState(null);
