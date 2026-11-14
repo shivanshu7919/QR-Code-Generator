@@ -7,9 +7,13 @@ const QRContextProvider = ({ children }) => {
   const [word, setWord] = useState("");
   const [size, setSize] = useState(250);
   const [bgColor, setBgColor] = useState("ffffff");
-  const [qrCode, setQrCode] = useState("");
   const [logo,setLogo]=useState(null);
   const [logoPreview,setLogoPreview]=useState("");
+  const [qrColor, setQrColor] = useState("#000000");
+  const [dotStyle, setDotStyle] = useState("square");
+  const [cornerSquareStyle, setCornerSquareStyle] = useState("square");
+  const [cornerDotStyle, setCornerDotStyle] = useState("square");
+  const [transparentBg, setTransparentBg] = useState(false);
 
   const value={
     temp,
@@ -20,22 +24,23 @@ const QRContextProvider = ({ children }) => {
     setSize,
     bgColor,
     setBgColor,
-    qrCode,
-    setQrCode,
     logo,
     setLogo,
     logoPreview,
-    setLogoPreview
+    setLogoPreview,
+    qrColor,
+    setQrColor,
+    dotStyle,
+    setDotStyle,
+    cornerSquareStyle,
+    setCornerSquareStyle,
+    cornerDotStyle,
+    setCornerDotStyle,
+    transparentBg, 
+    setTransparentBg
   };
 
-  useEffect(()=>{
-      if(word){
-        console.log(size);
-        setQrCode(
-          `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(word)}&size=${size}x${size}&bgcolor=${bgColor}`
-        );
-      }
-    },[word,size,bgColor]);
+  
   
 
   return(
